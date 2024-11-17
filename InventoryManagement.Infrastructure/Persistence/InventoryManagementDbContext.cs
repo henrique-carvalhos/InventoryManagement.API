@@ -11,7 +11,7 @@ namespace InventoryManagement.Infrastructure.Persistence
         }
 
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Customer> customers { get; set; }
+        public DbSet<Customer> Customers { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Sale> Sales { get; set; }
         public DbSet<SaleItem> SaleItems { get; set; }
