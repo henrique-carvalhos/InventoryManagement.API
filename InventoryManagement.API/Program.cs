@@ -1,9 +1,11 @@
+using InventoryManagement.Application;
 using InventoryManagement.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services
+    .AddApplication()
     .AddInfrastructure(builder.Configuration);
 
 
