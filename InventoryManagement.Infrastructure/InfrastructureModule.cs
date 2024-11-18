@@ -1,4 +1,6 @@
-﻿using InventoryManagement.Infrastructure.Persistence;
+﻿using InventoryManagement.Core.Repositories;
+using InventoryManagement.Infrastructure.Persistence;
+using InventoryManagement.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,7 +9,7 @@ namespace InventoryManagement.Infrastructure
 {
     public static class InfrastructureModule
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration) 
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services
                 .AddRepositories()
@@ -27,7 +29,7 @@ namespace InventoryManagement.Infrastructure
 
         private static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            //services.AddScoped<, >();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
 
             return services;
         }
