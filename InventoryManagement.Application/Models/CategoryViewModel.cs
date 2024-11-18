@@ -2,7 +2,7 @@
 
 namespace InventoryManagement.Application.Models
 {
-    internal class CategoryViewModel
+    public class CategoryViewModel
     {
         public CategoryViewModel(int id, string name, string description, bool isDeleted, List<Product> products)
         {

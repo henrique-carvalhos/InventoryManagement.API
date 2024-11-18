@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
+using InventoryManagement.Application.Queries.GetCategoryById;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -23,8 +24,8 @@ namespace InventoryManagement.Application
 
         public static IServiceCollection AddHandlers(this IServiceCollection services)
         {
-            //services.AddMediatR(config =>
-            //config.RegisterServicesFromAssemblyContaining<>());
+            services.AddMediatR(config =>
+            config.RegisterServicesFromAssemblyContaining<GetCategoryByIdQuery>());
 
             return services;
         }
