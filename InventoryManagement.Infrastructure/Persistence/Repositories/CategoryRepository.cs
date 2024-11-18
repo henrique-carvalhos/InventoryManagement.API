@@ -1,11 +1,6 @@
 ﻿using InventoryManagement.Core.Entities;
 using InventoryManagement.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InventoryManagement.Infrastructure.Persistence.Repositories
 {
@@ -25,9 +20,13 @@ namespace InventoryManagement.Infrastructure.Persistence.Repositories
             return category.Id;
         }
 
-        public Task<List<Category>> GetAll(string search)
+        public async Task<List<Category>> GetAll(string search)
         {
-            throw new NotImplementedException();
+            var categories = await _dbContext.Categories
+                .Where(u => !u.IsDeleted && (search == "" || u.Description.Contains(search)))
+                .ToListAsync();
+
+            return categories;
         }
 
         public async Task<Category?> GetbyId(int id)

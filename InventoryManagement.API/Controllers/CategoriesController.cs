@@ -1,4 +1,5 @@
 ﻿using InventoryManagement.Application.Commands.InsertCaregory;
+using InventoryManagement.Application.Queries.GetAllCategory;
 using InventoryManagement.Application.Queries.GetCategoryById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,16 @@ namespace InventoryManagement.API.Controllers
         public CategoriesController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll(string search = "")
+        {
+            var query = new GetAllCategoryQuery(search);
+
+            var result = await _mediator.Send(query);
+
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
