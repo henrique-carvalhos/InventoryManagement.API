@@ -1,4 +1,5 @@
-﻿using InventoryManagement.Application.Commands.InsertCaregory;
+﻿using InventoryManagement.Application.Commands.DeleteCategory;
+using InventoryManagement.Application.Commands.InsertCaregory;
 using InventoryManagement.Application.Commands.UpdateCategory;
 using InventoryManagement.Application.Queries.GetAllCategory;
 using InventoryManagement.Application.Queries.GetCategoryById;
@@ -48,6 +49,19 @@ namespace InventoryManagement.API.Controllers
             var result = await _mediator.Send(command);
 
             return CreatedAtAction(nameof(GetById), new { id = result.Data }, command);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _mediator.Send(new DeleteCategoryCommand(id));
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
+
+            return NoContent();
         }
 
         [HttpPut]
