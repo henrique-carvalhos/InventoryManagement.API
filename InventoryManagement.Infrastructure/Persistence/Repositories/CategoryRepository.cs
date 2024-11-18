@@ -35,9 +35,10 @@ namespace InventoryManagement.Infrastructure.Persistence.Repositories
                 .SingleOrDefaultAsync(c => c.Id == id);
         }
 
-        public Task Update(Category category)
+        public async Task Update(Category category)
         {
-            throw new NotImplementedException();
+            _dbContext.Update(category);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

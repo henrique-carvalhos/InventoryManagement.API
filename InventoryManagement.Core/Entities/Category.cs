@@ -14,5 +14,11 @@
         public string Description { get; private set; }
 
         public List<Product> Products { get; set; }
+
+        public void Update(string name, string description)
+        {
+            Name = name;
+            Description = description;
+        }
     }
 }
