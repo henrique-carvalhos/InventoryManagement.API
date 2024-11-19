@@ -1,4 +1,6 @@
-﻿using InventoryManagement.Application.Commands.InsertCustomer;
+﻿using InventoryManagement.Application.Commands.DeleteCustomer;
+using InventoryManagement.Application.Commands.InsertCustomer;
+using InventoryManagement.Application.Commands.UpdateCustomer;
 using InventoryManagement.Application.Queries.GetAllCustomer;
 using InventoryManagement.Application.Queries.GetCustomerById;
 using MediatR;

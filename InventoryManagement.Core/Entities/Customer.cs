@@ -16,5 +16,12 @@
         public string Phone { get; private set; }
 
         public List<Sale> Sales { get; set; }
+
+        public void Update(string name, string email, string phone)
+        {
+            Name = name;
+            Email = email;
+            Phone = phone;
+        }
     }
 }
