@@ -2,7 +2,7 @@
 
 namespace InventoryManagement.Application.Models
 {
-    internal class CustomerViewModel
+    public class CustomerViewModel
     {
         public CustomerViewModel(int id, string name, string email, string phone, bool isDeleted, DateTime createdAt, List<Sale> sales)
         {
