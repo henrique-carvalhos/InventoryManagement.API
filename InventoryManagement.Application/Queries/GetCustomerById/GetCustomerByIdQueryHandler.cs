@@ -18,7 +18,7 @@ namespace InventoryManagement.Application.Queries.GetCustomerById
 
             if (customer is null)
             {
-                return ResultViewModel<CustomerViewModel>.Error("Fornecedor não encontrada");
+                return ResultViewModel<CustomerViewModel>.Error("Cliente não encontrada");
             }
 
             var model = CustomerViewModel.FromEntity(customer);

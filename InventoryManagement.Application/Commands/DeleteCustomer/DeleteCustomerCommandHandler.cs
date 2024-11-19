@@ -18,7 +18,7 @@ namespace InventoryManagement.Application.Commands.DeleteCustomer
 
             if (customer is null)
             {
-                return ResultViewModel.Error("Fornecedor não encontrado");
+                return ResultViewModel.Error("Cliente não encontrado");
             }
 
             customer.SetAsDeleted();
