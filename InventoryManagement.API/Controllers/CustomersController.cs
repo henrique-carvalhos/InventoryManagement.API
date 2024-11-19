@@ -1,12 +1,10 @@
-﻿using InventoryManagement.Application.Commands.DeleteCustomer;
-using InventoryManagement.Application.Commands.InsertCaregory;
-using InventoryManagement.Application.Commands.UpdateCustomer;
+﻿using InventoryManagement.Application.Commands.InsertCustomer;
 using InventoryManagement.Application.Queries.GetAllCustomer;
 using InventoryManagement.Application.Queries.GetCustomerById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace InventoryManagement.API.Properties
+namespace InventoryManagement.API.Controllers
 {
     [Route("api/customers")]
     [ApiController]
