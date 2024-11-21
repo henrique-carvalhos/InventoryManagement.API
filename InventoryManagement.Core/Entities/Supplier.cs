@@ -18,5 +18,14 @@
         public string Address { get; private set; }
 
         public List<Product> Products { get; set; }
+
+        public void Update(string name, string contact, string email, string address)
+        {
+            Name = name;
+            Contact = contact;
+            Email = email;
+            Address = address;
+        }
+
     }
 }
