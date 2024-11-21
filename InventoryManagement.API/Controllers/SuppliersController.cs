@@ -1,5 +1,5 @@
-﻿using InventoryManagement.Application.Queries.GetAllCustomer;
-using InventoryManagement.Application.Queries.GetCustomerById;
+﻿using InventoryManagement.Application.Queries.GetAllSupplier;
+using InventoryManagement.Application.Queries.GetSupplierById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
