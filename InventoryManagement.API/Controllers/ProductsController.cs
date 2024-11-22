@@ -1,4 +1,5 @@
-﻿using InventoryManagement.Application.Commands.InsertProduct;
+﻿using InventoryManagement.Application.Commands.DeleteProduct;
+using InventoryManagement.Application.Commands.InsertProduct;
 using InventoryManagement.Application.Queries.GetAllProduct;
 using InventoryManagement.Application.Queries.GetProductById;
 using MediatR;
@@ -47,6 +48,19 @@ namespace InventoryManagement.API.Controllers
             var result = await _mediator.Send(command);
 
             return CreatedAtAction(nameof(GetById), new { id = result.Data }, command);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _mediator.Send(new DeleteProductCommand(id));
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
+
+            return NoContent();
         }
     }
 }
