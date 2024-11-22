@@ -1,4 +1,5 @@
-﻿using InventoryManagement.Application.Queries.GetAllSupplier;
+﻿using InventoryManagement.Application.Commands.InsertSupplier;
+using InventoryManagement.Application.Queries.GetAllSupplier;
 using InventoryManagement.Application.Queries.GetSupplierById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -38,6 +39,14 @@ namespace InventoryManagement.API.Controllers
             }
 
             return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(InsertSupplierCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            return CreatedAtAction(nameof(GetById), new { id = result.Data }, command);
         }
     }
 }
