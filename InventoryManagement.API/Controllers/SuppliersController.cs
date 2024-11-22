@@ -1,4 +1,5 @@
 ﻿using InventoryManagement.Application.Commands.InsertSupplier;
+using InventoryManagement.Application.Commands.UpdateSupplier;
 using InventoryManagement.Application.Queries.GetAllSupplier;
 using InventoryManagement.Application.Queries.GetSupplierById;
 using MediatR;
@@ -47,6 +48,19 @@ namespace InventoryManagement.API.Controllers
             var result = await _mediator.Send(command);
 
             return CreatedAtAction(nameof(GetById), new { id = result.Data }, command);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put(int id, UpdateSupplierCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
+
+            return NoContent();
         }
     }
 }
