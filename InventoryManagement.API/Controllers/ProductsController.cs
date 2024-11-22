@@ -1,5 +1,6 @@
 ﻿using InventoryManagement.Application.Commands.DeleteProduct;
 using InventoryManagement.Application.Commands.InsertProduct;
+using InventoryManagement.Application.Commands.UpdateProduct;
 using InventoryManagement.Application.Queries.GetAllProduct;
 using InventoryManagement.Application.Queries.GetProductById;
 using MediatR;
@@ -54,6 +55,19 @@ namespace InventoryManagement.API.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _mediator.Send(new DeleteProductCommand(id));
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
+
+            return NoContent();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put(int id, UpdateProductCommand command)
+        {
+            var result = await _mediator.Send(command);
 
             if (!result.IsSuccess)
             {

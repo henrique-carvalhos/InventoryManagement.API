@@ -25,5 +25,14 @@
         public int IdSupplier { get; private set; }
         public Supplier Supplier { get; private set; }
 
+        public void Update(string name, string description, decimal price, int quantityInStock, int idCategory, int idSupplier)
+        {
+            Name = name;
+            Description = description;
+            Price = price;
+            QuantityInStock = quantityInStock;
+            IdCategory = idCategory;
+            IdSupplier = idSupplier;
+        }
     }
 }
