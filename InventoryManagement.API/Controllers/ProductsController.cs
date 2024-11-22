@@ -1,5 +1,5 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Http;
+﻿using InventoryManagement.Application.Queries.GetProductById;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InventoryManagement.API.Controllers
@@ -12,6 +12,21 @@ namespace InventoryManagement.API.Controllers
         public ProductsController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var query = new GetProductByIdQuery(id);
+
+            var result = await _mediator.Send(query);
+
+            if (result is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
         }
     }
 }
