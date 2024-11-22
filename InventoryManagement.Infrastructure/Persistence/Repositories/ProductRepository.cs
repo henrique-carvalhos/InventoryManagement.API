@@ -1,5 +1,6 @@
 ﻿using InventoryManagement.Core.Entities;
 using InventoryManagement.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,14 +30,16 @@ namespace InventoryManagement.Infrastructure.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Product?> GetbyId(int id)
+        public async Task<Product?> GetbyId(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Products
+                .SingleOrDefaultAsync(s => s.Id == id);
         }
 
-        public Task Update(Product product)
+        public async Task Update(Product product)
         {
-            throw new NotImplementedException();
+            _context.Update(product);
+            await _context.SaveChangesAsync();
         }
     }
 }
