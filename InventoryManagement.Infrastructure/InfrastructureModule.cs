@@ -32,6 +32,7 @@ namespace InventoryManagement.Infrastructure
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ISupplierRepository, SupplierRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
             return services;
         }
