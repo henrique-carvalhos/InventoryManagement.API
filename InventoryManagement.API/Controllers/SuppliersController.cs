@@ -1,4 +1,5 @@
-﻿using InventoryManagement.Application.Commands.InsertSupplier;
+﻿using InventoryManagement.Application.Commands.DeleteSupplier;
+using InventoryManagement.Application.Commands.InsertSupplier;
 using InventoryManagement.Application.Commands.UpdateSupplier;
 using InventoryManagement.Application.Queries.GetAllSupplier;
 using InventoryManagement.Application.Queries.GetSupplierById;
@@ -48,6 +49,19 @@ namespace InventoryManagement.API.Controllers
             var result = await _mediator.Send(command);
 
             return CreatedAtAction(nameof(GetById), new { id = result.Data }, command);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _mediator.Send(new DeleteSupplierCommand(id));
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
+
+            return NoContent();
         }
 
         [HttpPut]
