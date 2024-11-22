@@ -23,8 +23,8 @@ namespace InventoryManagement.Infrastructure.Persistence.Repositories
         public async Task<List<Product>> GetAll(string search)
         {
             var product = await _context.Products
-                .Include(s => s.IdSupplier)
-                .Include(c => c.IdCategory)
+                .Include(s => s.Supplier)
+                .Include(c => c.Category)
                 .Where(u => !u.IsDeleted && (search == "" || u.Name.Contains(search)))
                 .ToListAsync();
 
@@ -34,8 +34,8 @@ namespace InventoryManagement.Infrastructure.Persistence.Repositories
         public async Task<Product?> GetbyId(int id)
         {
             return await _context.Products
-                .Include(s => s.IdSupplier)
-                .Include(c => c.IdCategory)
+                .Include(s => s.Supplier)
+                .Include(c => c.Category)
                 .SingleOrDefaultAsync(s => s.Id == id);
         }
 
