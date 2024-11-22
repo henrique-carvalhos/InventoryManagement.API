@@ -10,9 +10,18 @@ namespace InventoryManagement.Infrastructure.Persistence.Repositories
 {
     public class ProductRepository : IProductRepository
     {
-        public Task<int> Add(Product product)
+        private readonly InventoryManagementDbContext _context;
+        public ProductRepository(InventoryManagementDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+
+        public async Task<int> Add(Product product)
+        {
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync();
+
+            return product.Id;
         }
 
         public Task<List<Product>> GetAll(string search)
