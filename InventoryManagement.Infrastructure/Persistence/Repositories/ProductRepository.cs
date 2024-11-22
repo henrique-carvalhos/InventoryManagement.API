@@ -25,14 +25,22 @@ namespace InventoryManagement.Infrastructure.Persistence.Repositories
             return product.Id;
         }
 
-        public Task<List<Product>> GetAll(string search)
+        public async Task<List<Product>> GetAll(string search)
         {
-            throw new NotImplementedException();
+            var product = await _context.Products
+                .Include(s => s.IdSupplier)
+                .Include(c => c.IdCategory)
+                .Where(u => !u.IsDeleted && (search == "" || u.Name.Contains(search)))
+                .ToListAsync();
+
+            return product;
         }
 
         public async Task<Product?> GetbyId(int id)
         {
             return await _context.Products
+                .Include(s => s.IdSupplier)
+                .Include(c => c.IdCategory)
                 .SingleOrDefaultAsync(s => s.Id == id);
         }
 
