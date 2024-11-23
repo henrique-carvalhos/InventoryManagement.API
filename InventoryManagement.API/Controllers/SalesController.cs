@@ -1,4 +1,5 @@
-﻿using InventoryManagement.Application.Commands.InsertSale;
+﻿using InventoryManagement.Application.Commands.DeleteSale;
+using InventoryManagement.Application.Commands.InsertSale;
 using InventoryManagement.Application.Commands.UpdateSale;
 using InventoryManagement.Application.Queries.GetAllSale;
 using InventoryManagement.Application.Queries.GetSaleById;
@@ -48,6 +49,19 @@ namespace InventoryManagement.API.Controllers
             var result = await _mediator.Send(command);
 
             return CreatedAtAction(nameof(GetById), new { id = result.Data }, command);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _mediator.Send(new DeleteSaleCommand(id));
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
+
+            return NoContent();
         }
 
         [HttpPut]
