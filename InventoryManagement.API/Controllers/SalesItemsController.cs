@@ -1,4 +1,5 @@
 ﻿using InventoryManagement.Application.Commands.InsertSaleItem;
+using InventoryManagement.Application.Commands.UpdateSaleItem;
 using InventoryManagement.Application.Queries.GetAllSaleItem;
 using InventoryManagement.Application.Queries.GetSaleItemById;
 using MediatR;
@@ -48,6 +49,19 @@ namespace InventoryManagement.API.Controllers
             var result = await _mediator.Send(command);
 
             return CreatedAtAction(nameof(GetById), new { id = result.Data }, command);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put(int id, UpdateSaleItemCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
+
+            return NoContent();
         }
     }
 }

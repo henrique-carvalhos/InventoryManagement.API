@@ -18,5 +18,13 @@
 
         public int IdProduct { get; private set; }
         public Product Product { get; private set; }
+
+        public void Update(int quantity, decimal unitPrice, int idSale, int idProduct)
+        {
+            Quantity = quantity;
+            UnitPrice = unitPrice;
+            IdSale = idSale;
+            IdProduct = idProduct;
+        }
     }
 }
