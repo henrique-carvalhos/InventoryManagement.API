@@ -6,6 +6,8 @@
         {
             Quantity = quantity;
             UnitPrice = unitPrice;
+            IdSale = idSale;
+            IdProduct = idProduct;
         }
 
         public int Quantity { get; private set; }
