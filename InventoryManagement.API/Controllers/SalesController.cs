@@ -1,7 +1,7 @@
-﻿using InventoryManagement.Application.Queries.GetAllSale;
+﻿using InventoryManagement.Application.Commands.InsertSale;
+using InventoryManagement.Application.Queries.GetAllSale;
 using InventoryManagement.Application.Queries.GetSaleById;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InventoryManagement.API.Controllers
@@ -39,6 +39,14 @@ namespace InventoryManagement.API.Controllers
             var result = await _mediator.Send(query);
 
             return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(InsertSaleCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            return CreatedAtAction(nameof(GetById), new { id = result.Data }, command);
         }
     }
 }
