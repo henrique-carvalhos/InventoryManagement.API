@@ -1,33 +1,48 @@
 ﻿using InventoryManagement.Core.Entities;
 using InventoryManagement.Core.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace InventoryManagement.Infrastructure.Persistence.Repositories
 {
-    public class SaleItemRepository : ISaleRepository
+    public class SaleItemRepository : ISaleItemRepository
     {
-        public Task<int> Add(Sale sale)
+        private readonly InventoryManagementDbContext _context;
+        public SaleItemRepository(InventoryManagementDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task<List<Sale>> GetAll(string search)
+        public async Task<int> Add(SaleItem item)
         {
-            throw new NotImplementedException();
+            _context.Add(item);
+            await _context.SaveChangesAsync();
+
+            return item.Id;
         }
 
-        public Task<Sale?> GetbyId(int id)
+        public async Task<List<SaleItem>> GetAll(string search)
         {
-            throw new NotImplementedException();
+            var saleItem = await _context.SaleItems
+                .Include(p => p.Product)
+                .Include(s => s.Sale)
+                .Where(u => !u.IsDeleted && (search == "" || u.Product.Description.Contains(search)))
+                .ToListAsync();
+
+            return saleItem;
         }
 
-        public Task Update(Sale sale)
+        public async Task<SaleItem?> GetbyId(int id)
         {
-            throw new NotImplementedException();
+            return await _context.SaleItems
+                .Include(p => p.Product)
+                .Include(s => s.Sale)
+                .SingleOrDefaultAsync(s => s.Id == id);
+        }
+
+        public async Task Update(SaleItem item)
+        {
+            _context.Update(item);
+            await _context.SaveChangesAsync();
         }
     }
 }
