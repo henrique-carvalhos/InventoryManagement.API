@@ -1,4 +1,5 @@
-﻿using InventoryManagement.Application.Queries.GetSaleById;
+﻿using InventoryManagement.Application.Queries.GetAllSale;
+using InventoryManagement.Application.Queries.GetSaleById;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,16 @@ namespace InventoryManagement.API.Controllers
             {
                 return NotFound();
             }
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get(string search = "")
+        {
+            var query = new GetAllSaleQuery(search);
+
+            var result = await _mediator.Send(query);
 
             return Ok(result);
         }
