@@ -1,5 +1,7 @@
 ﻿using InventoryManagement.Core.Entities;
 using InventoryManagement.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,24 +12,41 @@ namespace InventoryManagement.Infrastructure.Persistence.Repositories
 {
     public class SaleRepository : ISaleRepository
     {
-        public Task<int> Add(Sale sale)
+        private readonly InventoryManagementDbContext _context;
+        public SaleRepository(InventoryManagementDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task<List<Sale>> GetAll(string search)
+        public async Task<int> Add(Sale sale)
         {
-            throw new NotImplementedException();
+            _context.Sales.Add(sale);
+            await _context.SaveChangesAsync();
+
+            return sale.Id;
         }
 
-        public Task<Sale?> GetbyId(int id)
+        public async Task<List<Sale>> GetAll(string search)
         {
-            throw new NotImplementedException();
+            var sales = await _context.Sales
+                .Include(c => c.Customer)
+                .Where(u => !u.IsDeleted)
+                .ToListAsync();
+
+            return sales;
         }
 
-        public Task Update(Sale sale)
+        public async Task<Sale?> GetbyId(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Sales
+                .Include(c => c.Customer)
+                .SingleOrDefaultAsync(s => s.Id == id);
+        }
+
+        public async Task Update(Sale sale)
+        {
+            _context.Update(sale);
+            await _context.SaveChangesAsync();
         }
     }
 }

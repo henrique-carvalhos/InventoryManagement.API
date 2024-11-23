@@ -19,5 +19,11 @@
         public Customer Customer { get; private set; }
 
         public List<SaleItem> SaleItems { get; set; }
+
+        public void Update(decimal totalAmount, int idCustomer)
+        {
+            TotalAmount = totalAmount;
+            IdCustomer = idCustomer;
+        }
     }
 }
