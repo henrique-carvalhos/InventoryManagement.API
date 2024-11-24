@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
+using InventoryManagement.Application.Commands.InsertCaregory;
 using InventoryManagement.Application.Queries.GetCategoryById;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,8 +33,8 @@ namespace InventoryManagement.Application
 
         public static IServiceCollection AddValidation(this IServiceCollection services)
         {
-            //services.AddFluentValidationAutoValidation()
-            //    .AddValidatorsFromAssemblyContaining<CreateProductCommand>();
+            services.AddFluentValidationAutoValidation()
+                .AddValidatorsFromAssemblyContaining<InsertCategoryCommand>();
 
             //services.AddTransient<IPipelineBehavior<CreateProductCommand, ResultViewModel<int>>, ValidateCreateProductCommandBehavior>();
 
