@@ -3,6 +3,7 @@ using FluentValidation.AspNetCore;
 using InventoryManagement.Application.Commands.InsertCaregory;
 using InventoryManagement.Application.Commands.InsertProduct;
 using InventoryManagement.Application.Commands.InsertSale;
+using InventoryManagement.Application.Commands.InsertSaleItem;
 using InventoryManagement.Application.Models;
 using InventoryManagement.Application.Queries.GetCategoryById;
 using MediatR;
@@ -36,6 +37,7 @@ namespace InventoryManagement.Application
 
             services.AddTransient<IPipelineBehavior<InsertProductCommand, ResultViewModel<int>>, ValidateInsertProductCommandBehavior>();
             services.AddTransient<IPipelineBehavior<InsertSaleCommand, ResultViewModel<int>>, ValidateInsertSaleCommandBehavior>();
+            services.AddTransient<IPipelineBehavior<InsertSaleItemCommand, ResultViewModel<int>>, ValidateInsertSaleItemCommandBehavior>();
 
             return services;
         }
