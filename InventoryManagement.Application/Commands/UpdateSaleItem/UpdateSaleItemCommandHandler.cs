@@ -23,6 +23,8 @@ namespace InventoryManagement.Application.Commands.UpdateSaleItem
 
             saleItem.Update(request.Quantity, request.UnitPrice, request.IdSale, request.IdProduct);
 
+            await _repository.Update(saleItem);
+
             return ResultViewModel.Success();
         }
     }
