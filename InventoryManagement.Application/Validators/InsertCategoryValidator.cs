@@ -9,7 +9,7 @@ namespace InventoryManagement.Application.Validators
         {
             RuleFor(p => p.Name)
                 .NotEmpty()
-                .WithMessage("Descrição não pode ser vazia")
+                .WithMessage("Nome não pode ser vazio")
                 .MaximumLength(150)
                 .WithMessage("Tamanho máximo é de 150 caracteres");
 
