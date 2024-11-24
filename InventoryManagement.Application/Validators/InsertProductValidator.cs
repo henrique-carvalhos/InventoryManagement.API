@@ -21,7 +21,7 @@ namespace InventoryManagement.Application.Validators
 
             RuleFor(p => p.Price)
                 .NotEmpty()
-                .WithMessage("PReço não pode ser vazio")
+                .WithMessage("Preço não pode ser vazio")
                 .GreaterThan(0)
                     .WithMessage("Preço deve ser maior R$0,00");
 
