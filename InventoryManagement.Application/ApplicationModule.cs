@@ -2,15 +2,11 @@
 using FluentValidation.AspNetCore;
 using InventoryManagement.Application.Commands.InsertCaregory;
 using InventoryManagement.Application.Commands.InsertProduct;
+using InventoryManagement.Application.Commands.InsertSale;
 using InventoryManagement.Application.Models;
 using InventoryManagement.Application.Queries.GetCategoryById;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InventoryManagement.Application
 {
@@ -39,6 +35,7 @@ namespace InventoryManagement.Application
                 .AddValidatorsFromAssemblyContaining<InsertCategoryCommand>();
 
             services.AddTransient<IPipelineBehavior<InsertProductCommand, ResultViewModel<int>>, ValidateInsertProductCommandBehavior>();
+            services.AddTransient<IPipelineBehavior<InsertSaleCommand, ResultViewModel<int>>, ValidateInsertSaleCommandBehavior>();
 
             return services;
         }
