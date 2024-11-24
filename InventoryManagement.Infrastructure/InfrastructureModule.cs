@@ -21,8 +21,8 @@ namespace InventoryManagement.Infrastructure
         private static IServiceCollection AddData(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("InventoryManagementCs");
-            services.AddDbContext<InventoryManagementDbContext>(o => o.UseInMemoryDatabase("InventoryManagementDb"));
-            //services.AddDbContext<InventoryManagementDbContext>(o => o.UseSqlServer(connectionString));
+            services.AddDbContext<InventoryManagementDbContext>(o => o.UseSqlServer(connectionString));
+            //services.AddDbContext<InventoryManagementDbContext>(o => o.UseInMemoryDatabase("InventoryManagementDb"));
 
             return services;
         }
